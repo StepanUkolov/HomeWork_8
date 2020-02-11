@@ -3,10 +3,10 @@ package company.steps;
 import company.util.TestProperties;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.yandex.qatools.allure.annotations.Attachment;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;

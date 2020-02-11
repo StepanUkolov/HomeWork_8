@@ -7,7 +7,11 @@ import io.qameta.allure.Attachment;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +25,7 @@ public class BaseSteps {
     }
 
     @Before
-    public static void setUp() {
+    public static void setUp() throws MalformedURLException {
 
         switch (properties.getProperty("browser")){
             case "firefox":
@@ -30,11 +34,17 @@ public class BaseSteps {
                 break;
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver"));
-                driver = new ChromeDriver();
+
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setBrowserName("chrome");
+                capabilities.setVersion("73.0");
+                capabilities.setCapability("enableVNC", true);
+                capabilities.setCapability("enableVideo", false);
+                capabilities.setCapability("enableLog", false);
+                driver = new RemoteWebDriver(
+                        URI.create("http://selenoid.aplana.com:4445/wd/hub/").toURL(),
+                        capabilities);
                 break;
-            default:
-                System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver"));
-                driver = new ChromeDriver();
         }
         baseUrl = properties.getProperty("app.url");
 

@@ -19,7 +19,7 @@ public class MainPage extends BasePageObject {
     private WebElement subMenuItem;
 
     public void selectMenuItem(String itemName) {
-        menuItems.findElement(By.xpath("//span[text()='" + itemName + "']")).click();
+        menuItems.findElement(By.xpath("//span[text()='" + itemName + "']")).click();  // .//span[text()= не работает
     }
 
     public void selectSubMenuItem(String itemName) {

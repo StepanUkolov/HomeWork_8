@@ -2,6 +2,7 @@ package company.steps;
 
 import cucumber.api.java.en.When;
 import cucumber.api.java.ru.Дано;
+import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Тогда;
 import io.cucumber.datatable.DataTable;
@@ -37,20 +38,12 @@ public class ScenarioSteps {
     SendAppSteps sendAppSteps = new SendAppSteps();
     BaseSteps baseSteps = new BaseSteps();
 
-    @Дано("^в меню доступны пункты$")
-    public void вМенюДоступныПункты(DataTable arg) {
-        List<Map<String, String>> table = arg.asMaps(String.class, String.class);
-        System.out.println(table.get(0).get("Название"));
-        System.out.println(table.get(1).get("Название"));
-        System.out.println(table.get(2).get("Название"));
-    }
-
-    @When("^выбран пункт меню \"(.+)\"$")
+    @Когда("^выбран пункт меню \"(.+)\"$")
     public void selectMenuItem(String itemName) {
         mainPageSteps.selectMenuItem(itemName);
     }
 
-    @When("^выбран вид ипотеки \"(.+)\"$")
+    @И("^выбран вид ипотеки \"(.+)\"$")
     public void selectSubMenuItem(String itemName) {
         mainPageSteps.selectSubMenuItem(itemName);
     }

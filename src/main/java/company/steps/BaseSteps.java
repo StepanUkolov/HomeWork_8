@@ -30,20 +30,29 @@ public class BaseSteps {
         switch (properties.getProperty("browser")){
             case "firefox":
                 System.setProperty("webdriver.gecko.driver", properties.getProperty("webdriver.gecko.driver"));
-                driver = new FirefoxDriver();
+
+                DesiredCapabilities capabilities1 = new DesiredCapabilities();
+                capabilities1.setBrowserName("gecko");
+                capabilities1.setVersion("73.0");
+                capabilities1.setCapability("enableVNC", true);
+                capabilities1.setCapability("enableVideo", false);
+                capabilities1.setCapability("enableLog", false);
+                driver = new RemoteWebDriver(
+                        URI.create("http://selenoid.aplana.com:4445/wd/hub/").toURL(),
+                        capabilities1);
                 break;
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver"));
 
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setBrowserName("chrome");
-                capabilities.setVersion("73.0");
-                capabilities.setCapability("enableVNC", true);
-                capabilities.setCapability("enableVideo", false);
-                capabilities.setCapability("enableLog", false);
+                DesiredCapabilities capabilities2 = new DesiredCapabilities();
+                capabilities2.setBrowserName("chrome");
+                capabilities2.setVersion("73.0");
+                capabilities2.setCapability("enableVNC", true);
+                capabilities2.setCapability("enableVideo", false);
+                capabilities2.setCapability("enableLog", false);
                 driver = new RemoteWebDriver(
                         URI.create("http://selenoid.aplana.com:4445/wd/hub/").toURL(),
-                        capabilities);
+                        capabilities2);
                 break;
         }
         baseUrl = properties.getProperty("app.url");
